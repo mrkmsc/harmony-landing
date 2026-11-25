@@ -2,6 +2,10 @@
   const landing = document.getElementById('harmony-landing');
   if (!landing) return;
 
+  for (const label of landing.querySelectorAll('nav a[href="#harmony-team"], #harmony-team h2')) {
+    label.textContent = 'Ведущие тренинга';
+  }
+
   // Use Tilda's delegated cart handler for orders on this page.
   for (const link of landing.querySelectorAll('.booking a[href*="#order:"]')) {
     const order = new URL(link.href).hash;
