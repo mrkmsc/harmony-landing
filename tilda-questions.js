@@ -2,6 +2,12 @@
   const landing = document.getElementById('harmony-landing');
   if (!landing || landing.querySelector('.harmony-question')) return;
 
+  // Use Tilda's delegated cart handler for orders on this page.
+  for (const link of landing.querySelectorAll('.booking a[href*="#order:"]')) {
+    const order = new URL(link.href).hash;
+    link.setAttribute('href', decodeURIComponent(order));
+  }
+
   const source = 'https://psy-sng.ru/harmony';
   const originalForm = source + '#rec6082405201';
   const email = 'mailto:psy-sng.ru@yandex.ru?subject=' + encodeURIComponent('Вопрос о практикуме «Сексуальная гармонизация»');
