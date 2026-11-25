@@ -1,3 +1,4 @@
+<stdin>:23: SyntaxWarning: invalid escape sequence '\`'
 (() => {
   const landing = document.getElementById('harmony-landing');
   if (!landing) return;
@@ -6,10 +7,37 @@
     label.textContent = 'Ведущие тренинга';
   }
 
-  // Use Tilda's delegated cart handler for orders on this page.
-  for (const link of landing.querySelectorAll('.booking a[href*="#order:"]')) {
-    const order = new URL(link.href).hash;
-    link.setAttribute('href', decodeURIComponent(order));
+  const signup = landing.querySelector('#harmony-signup');
+  signup?.querySelector('.lead')?.remove();
+
+  // Keep Tilda's delegated cart handler on this page.
+  const booking = signup?.querySelector('.booking');
+  if (booking && !booking.querySelector('.harmony-payment-actions')) {
+    const links = booking.querySelectorAll('a[href*="#order:"]');
+    if (links.length) {
+      const actions = document.createElement('div');
+      actions.className = 'harmony-payment-actions';
+      links[0].before(actions);
+      for (const link of links) {
+        link.setAttribute('href', decodeURIComponent(new URL(link.href).hash));
+        actions.append(link);
+      }
+
+      const style = document.createElement('style');
+      style.textContent = `
+        @media (max-width: 760px) {
+          #harmony-landing .booking .harmony-payment-actions {
+            display: grid;
+            gap: .75rem;
+            margin-top: 1.4rem;
+          }
+          #harmony-landing .booking .harmony-payment-actions .button {
+            margin: 0;
+          }
+        }
+      `;
+      landing.prepend(style);
+    }
   }
 
   if (landing.querySelector('.harmony-question')) return;
@@ -46,7 +74,6 @@
 
   addButton(landing.querySelector('.hero .actions'), 'harmony-question-hero');
 
-  const booking = landing.querySelector('.booking');
   if (!booking) return;
   const contact = document.createElement('div');
   contact.style.marginTop = '1rem';
