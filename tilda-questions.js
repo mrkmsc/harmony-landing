@@ -42,6 +42,9 @@
     }
   }
 
+  const inquiryText = 'Есть вопросы перед записью? Оставьте заявку, и мы свяжемся с вами.';
+  const existingHint = booking?.querySelector('.harmony-question-signup')?.parentElement.querySelector('p');
+  if (existingHint) existingHint.textContent = inquiryText;
   if (landing.querySelector('.harmony-question')) return;
 
   const source = 'https://psy-sng.ru/harmony';
@@ -80,7 +83,7 @@
   const contact = document.createElement('div');
   contact.style.marginTop = '1rem';
   const hint = document.createElement('p');
-  hint.textContent = 'Есть вопросы перед записью? Оставьте заявку, и мы свяжемся с вами.';
+  hint.textContent = inquiryText;
   contact.append(hint);
   addButton(contact, 'harmony-question-signup');
   booking.append(contact);
