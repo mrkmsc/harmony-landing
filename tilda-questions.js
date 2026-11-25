@@ -1,4 +1,3 @@
-<stdin>:23: SyntaxWarning: invalid escape sequence '\`'
 (() => {
   const landing = document.getElementById('harmony-landing');
   if (!landing) return;
