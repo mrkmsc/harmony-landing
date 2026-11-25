@@ -18,7 +18,10 @@
       actions.className = 'harmony-payment-actions';
       links[0].before(actions);
       for (const link of links) {
-        link.setAttribute('href', decodeURIComponent(new URL(link.href).hash));
+        const order = decodeURIComponent(new URL(link.href).hash);
+        link.setAttribute('href', order);
+        if (order.endsWith(' бронь=1000')) link.textContent = 'Забронировать место';
+        if (order.endsWith(' тренинг=10000')) link.textContent = 'Оплатить участие';
         actions.append(link);
       }
 
@@ -77,7 +80,7 @@
   const contact = document.createElement('div');
   contact.style.marginTop = '1rem';
   const hint = document.createElement('p');
-  hint.textContent = 'Есть вопросы перед записью? Оставьте заявку, и организаторы свяжутся с вами.';
+  hint.textContent = 'Есть вопросы перед записью? Оставьте заявку, и мы свяжемся с вами.';
   contact.append(hint);
   addButton(contact, 'harmony-question-signup');
   booking.append(contact);
