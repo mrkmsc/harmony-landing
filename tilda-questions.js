@@ -1,12 +1,14 @@
 (() => {
   const landing = document.getElementById('harmony-landing');
-  if (!landing || landing.querySelector('.harmony-question')) return;
+  if (!landing) return;
 
   // Use Tilda's delegated cart handler for orders on this page.
   for (const link of landing.querySelectorAll('.booking a[href*="#order:"]')) {
     const order = new URL(link.href).hash;
     link.setAttribute('href', decodeURIComponent(order));
   }
+
+  if (landing.querySelector('.harmony-question')) return;
 
   const source = 'https://psy-sng.ru/harmony';
   const originalForm = source + '#rec6082405201';
