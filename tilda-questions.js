@@ -11,6 +11,10 @@
 
   // Keep Tilda's delegated cart handler on this page.
   const booking = signup?.querySelector('.booking');
+  const date = landing.querySelector('.hero .facts strong');
+  if (date) date.textContent = '30 января';
+  const bookingDate = booking?.querySelector('p:not(.eyebrow):not(.price)');
+  if (bookingDate) bookingDate.textContent = '30 января, 13:00–19:00. Бронь места — 1 000 ₽.';
   if (booking && !booking.querySelector('.harmony-payment-actions')) {
     const links = booking.querySelectorAll('a[href*="#order:"]');
     if (links.length) {
